@@ -1,0 +1,40 @@
+tell application "Finder"
+
+activate
+
+set file_count to count of (trash's items)
+
+-- log file_count
+
+repeat file_count times
+
+recoverMyFile() of me
+
+end repeat
+
+end tell
+
+
+
+on recoverMyFile()
+
+tell application "System Events"
+
+set frontmost of process "Finder" to true
+
+tell application "Finder"
+
+open trash
+
+select the first item of window "Trash"
+
+end tell
+
+tell process "Finder"
+
+key code 51 using command down
+
+delay 2 -- Yes, it's stupid, but necessary :(
+
+end tell
+
